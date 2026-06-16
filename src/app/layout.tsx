@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/image.svg" type="image/svg+xml" sizes="any" />
+      </head>
       <body>
         <Navbar />
         <main>{children}</main>

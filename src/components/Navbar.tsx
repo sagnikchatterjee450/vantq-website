@@ -4,18 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const SunIcon = () => (
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="4" />
-    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-  </svg>
-);
-
-const MoonIcon = () => (
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-  </svg>
-);
+// Theme is fixed to dark only; no theme icons required.
 
 const HamburgerIcon = () => (
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -33,26 +22,15 @@ const CloseIcon = () => (
 );
 
 export default function Navbar() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === '/';
 
   // Initialise theme from localStorage / system preference
   useEffect(() => {
-    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const initial = saved ?? sys;
-    setTheme(initial);
-    document.documentElement.setAttribute('data-theme', initial);
+    // Force dark theme for the whole app (no light mode available)
+    try { document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
   }, []);
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  };
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -82,9 +60,6 @@ export default function Navbar() {
           </div>
 
           <div className="nav-actions">
-            <button className="theme-btn" onClick={toggleTheme} aria-label="Toggle theme">
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-            </button>
             <button
               className="hamburger"
               onClick={() => setMenuOpen(o => !o)}

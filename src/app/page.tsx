@@ -91,14 +91,8 @@ export default function HomePage() {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div className="hero-graphic">
-              <div className="hg-top">EST. 2024</div>
-              <div className="hg-mid">VQ</div>
-              <div className="hg-bot">
-                <span>BRAND</span>
-                <span>STRATEGY</span>
-              </div>
-            </div>
+            
+            
           </div>
         </div>
       </section>
